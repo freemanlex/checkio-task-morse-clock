@@ -5,7 +5,10 @@
 
         "What're you doing?" Nikola asked curiously.<br><br>
 
-        "I'm sending our time logs for the last expedition to headquarters, but it's not an easy task..." Stephen grumbled, "Can you imagine that with all the computer power at our disposal, I STILL have to convert this message to Morse-code with only an on/off button... Hrmph... what a pain." He grumbled at the inconvenience.<br><br>
+        "I'm sending our time logs for the last expedition to headquarters, but it's not an easy task..."
+        Stephen grumbled, "Can you imagine that with all the computer power at our disposal,
+        I STILL have to convert this message to Morse-code with only an on/off button... Hrmph... what a pain."
+        He grumbled at the inconvenience.<br><br>
 
         "Let me look at it." Nikola offered his help, "It looks like a pretty easy solution, we could
         automate the process."<br><br>
@@ -24,39 +27,52 @@
         left: -20%;
     }
 </style>
+
+<p>
+
+    Help Stephen to create a module for converting normal time string to morse time string.
+    As you can see in the illustration, gray circle means on, and white circle means off.
+    Every digit in the time string contains a different number of slots.
+    The first digit for the hours has a length of 2 while the second digit for the hour has a length of 4.
+    The first digits for the minutes and second not have a length of 3 while the second digits for the minute and
+    second have a length of 4.
+    Every digit in the time is converted to binary representation.
+    You will convert every on ( or 1 ) signal to dash ( - ) and every off ( or 0 ) signal to dot ( . ).
+</p>
+
 <p style="text-align: center;">
     <img class="for_info_only" title="example" src="{{ MEDIA }}morse_clock.png" alt="example" width="500px"/>
     <span class="ref-source"><a href="http://en.wikipedia.org/wiki/Binary_clock">source: Wikipedia</a></span>
-    
+
     <img class="for_editor_only" title="example" src="{{ MEDIA }}morse_clock.png" alt="example" width="380px"/>
-</p>
-<p>Help Stephen to automate his task by creating a module. 
-    As you can see in above illustration, gray circle means on, and white circle means off. 
-    Every digit in the time string contains a different number of slots. 
-    The first digit for the hour has a length of 2 while the second digit for the hour has a length of 4. 
-    The first digits for the minute and second not have a length of 3 while the second digits for the minute and second have a length of 4. 
-    Every digit in the time is converted to binary representation. 
-    You will convert every on ( or 1 ) signal to dash ( - ) and every off ( or 0 ) signal to dot ( . )
 </p>
 
 <p>
-    <strong>Input: </strong> An unspecific time string ( could be hh:mm:ss or h:m:s or hh:m:ss format, with no specific format )
+    An time string could be in the follow formats: <em>"hh:mm:ss"</em>, <em>"h:m:s"</em> or <em>"hh:m:ss"</em>.
+    The "missing" digits are zeroes. For example, "1:2:3" is the same as "01:02:03".
+</p>
+<p>
+    The result will be a morse time string with specific format:
+    <pre style="text-align: center;">"h h : m m : s s"</pre>
+    where each digits represented as sequence of "." and "-"
+</p>
+
+<p>
+    <strong>Input: </strong> A normal time string as a string (unicode).
 </p>
 
 <div>
-    <strong>Output: </strong> A string of Morse symbol from binary representation with specific format:
-<pre style="text-align: center;">"h h : m m : s s"</pre>
-where each digits represented as sequence of "." and "-"
+    <strong>Output: </strong> The morse time string as a string.
 </div>
 
 <div class="for_info_only">
     <p>
         <strong>Example:</strong>
     </p>
-    <pre class="brush: python">assert checkio( "10:37:49" ) == ".- .... : .-- .--- : -.. -..-", "First Test"
-assert checkio( "21:34:56" ) == "-. ...- : .-- .-.. : -.- .--.", "Second Test"
-assert checkio( "00:1:02" ) == ".. .... : ... ...- : ... ..-.", "Third Test"
-assert checkio( "23:59:59" ) == "-. ..-- : -.- -..- : -.- -..-", "Fourth Test"
+    <pre class="brush: python">checkio("10:37:49") == ".- .... : .-- .--- : -.. -..-"
+checkio("21:34:56") == "-. ...- : .-- .-.. : -.- .--."
+checkio("00:1:02") == ".. .... : ... ...- : ... ..-."
+checkio("23:59:59") == "-. ..-- : -.- -..- : -.- -..-"
   
 </pre>
 </div>
