@@ -26,18 +26,28 @@
         position: relative;
         left: -20%;
     }
+
+    pre.format {
+        background-color: #EBEDED;
+        margin: 5px;
+        padding: 3px;
+        border: solid 1px #737370;
+        border-radius: 3px;
+        --webkit-border-radius: 3px;
+        width: 166px;
+    }
 </style>
 
 <p>
 
-    Help Stephen to create a module for converting normal time string to morse time string.
-    As you can see in the illustration, gray circle means on, and white circle means off.
+    Help Stephen to create a module for converting a normal time string to a morse time string.
+    As you can see in the illustration, a gray circle means on while a white circle means off.
     Every digit in the time string contains a different number of slots.
     The first digit for the hours has a length of 2 while the second digit for the hour has a length of 4.
     The first digits for the minutes and seconds have a length of 3 while the second digits for the minutes and
     seconds have a length of 4.
     Every digit in the time is converted to binary representation.
-    You will convert every on ( or 1 ) signal to dash ( - ) and every off ( or 0 ) signal to dot ( . ).
+    You will convert every on (or 1) signal to dash ("-") and every off (or 0) signal to dot (".").
 </p>
 
 <p style="text-align: center;">
@@ -51,11 +61,12 @@
     An time string could be in the follow formats: <em>"hh:mm:ss"</em>, <em>"h:m:s"</em> or <em>"hh:m:ss"</em>.
     The "missing" digits are zeroes. For example, "1:2:3" is the same as "01:02:03".
 </p>
-<p>
+<div>
     The result will be a morse time string with specific format:
-    <pre style="text-align: center;">"h h : m m : s s"</pre>
+    <pre class="format" style="text-align: center;">"h h : m m : s s"</pre>
     where each digits represented as sequence of "." and "-"
-</p>
+</div>
+<br/>
 
 <p>
     <strong>Input: </strong> A normal time string as a string (unicode).
@@ -64,7 +75,7 @@
 <div>
     <strong>Output: </strong> The morse time string as a string.
 </div>
-
+<br>
 <div class="for_info_only">
     <p>
         <strong>Example:</strong>
@@ -73,15 +84,24 @@
 checkio("21:34:56") == "-. ...- : .-- .-.. : -.- .--."
 checkio("00:1:02") == ".. .... : ... ...- : ... ..-."
 checkio("23:59:59") == "-. ..-- : -.- -..- : -.- -..-"
-  
 </pre>
 </div>
 
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    Here you can learn about binary numbers and how to format strings.
+    Did you see the binary clocks task earlier?
+    This is can be a fun gift for any geek.
+    We tried to combine the old good Morse code with a binary clock in this task,
+    and now you can create the new more complex binary clock,
+    which doesn't show time -- but makes morse style bips and beeps. ;-)
+
 </p>
 
+<p>
+    <strong>Precondition: </strong><br>
+    <em>time_string</em> contains correct time.
+
+</p>
 
 <p class="for_info_only">
     <strong>How to use TryIt: </strong><br>
