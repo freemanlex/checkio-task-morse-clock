@@ -1,0 +1,105 @@
+<div class="story">
+    <p>
+        "ti-taah ti-ti-ti-ti ti-taah-taah ti-taah-taah-taah taah-ti-ti taah-ti-ti-taah",
+        faisaient les cliquetis du télégraphe.<br><br>
+
+        "Que fais-tu?" demanda Nikola, curieux.<br><br>
+
+        "J'envoie nos derniers enregistrements de dates au quartier général, mais ce n'est vraiment pas facile...",
+        grommela Stephen, "Croirais-tu que malgré toute la puissance des ordinateurs à notre disposition,
+        j'en suis ENCORE réduit à convertir ce message en Morse avec seulement un bouton on/off...Hummm... que c'est pénible !"
+        grogna-t-il encore.<br><br>
+
+        "Laisse-moi jeter coup un oeil", proposa Nikola. "Cela m'a l'air assez simple d'automatiser ce procédé. 
+        C'est dans mes cordes !"<br><br>
+
+        "Oh.. tu es mon héros du jour", jubila Stephen . "Alors, comment allons-nous précéder?"<br><br>
+
+        "Avec Python!", s'exclama Nikola.
+    </p>
+</div>
+
+<style>
+    .ref-source {
+        font-size: .7em;
+        position: relative;
+        left: -20%;
+    }
+    pre.format {
+        background-color: #EBEDED;
+        margin: 5px;
+        padding: 3px;
+        border: solid 1px #737370;
+        border-radius: 3px;
+        --webkit-border-radius: 3px;
+        width: 166px;
+    }
+</style>
+
+<p>
+   Aidez Stephen à créer un module de conversion de chaîne de caractères, qui symbolise un horaire, en Morse.
+   Comme on le voit sur les illustrations, un cercle gris signifie "on" ("1") tandis qu'un cercle blanc signifie "off" ("0").
+   Chaque nombre dans la chaîne de caractères qui symbolise l'horaire en Morse a une longueur spécifique.
+   Le permier nombre pour l'heure contient 2 bits, tandis que le second nombre est de longueur 4.
+   Pour les minutes et les secondes, le premier nombre est de longueur 3, tandis que le second nombre est de longueur 4.
+   Chaque nombre dans la chaîne est converti en représentation binaire.
+   Chaque "on" (ou "1") sera converti en tiret ("-"), et chaque "off" (ou "0") sera converti en point (".").
+</p>
+
+<p style="text-align: center;">
+    <img class="for_info_only" title="example" src="{{ MEDIA }}morse_clock.png" alt="example" width="500px"/>
+    <span class="ref-source"><a href="http://en.wikipedia.org/wiki/Binary_clock">source: Wikipedia</a></span>
+
+    <img class="for_editor_only" title="example" src="{{ MEDIA }}morse_clock.png" alt="example" width="380px"/>
+</p>
+
+<p>
+    Une chaîne qui symbolise un horaire sera exprimée dans l'un des formats suivants:
+    <em>"hh:mm:ss"</em>, <em>"h:m:s"</em> ou <em>"hh:m:ss"</em>.
+    Les chiffres "manquants" sont des zéros.
+    Par exemple "1:2:3" est l'équivalent de "01:02:03".
+</p>
+<div>
+    Le résultat sera une chaîne de caractères représentant l'horaire en Morse, dans le format spécial suivant:
+    <pre class="format" style="text-align: center;">"h h : m m : s s"</pre>
+    où chaque chiffre est représenté par une succession de '.' et de '-'.
+</div>
+<br/>
+
+<p>
+    <strong>Input: </strong>Une chaîne de caractère qui représente un horaire (normal time string) (unicode).
+</p>
+
+<div>
+    <strong>Output: </strong> La chaîne de caractères (string) qui représente cet horaire en Morse (morse time string).
+</div>
+<br>
+<div class="for_info_only">
+    <p>
+        <strong>Exemple:</strong>
+    </p>
+    <pre class="brush: python">checkio("10:37:49") == ".- .... : .-- .--- : -.. -..-"
+checkio("21:34:56") == "-. ...- : .-- .-.. : -.- .--."
+checkio("00:1:02") == ".. .... : ... ...- : ... ..-."
+checkio("23:59:59") == "-. ..-- : -.- -..- : -.- -..-"
+</pre>
+</div>
+
+<p class="for_info_only">
+    <strong>APplication: </strong>
+    Une horloge Morse binaire peut être un beau cadeau inédit pour un ami geek...
+    Nous avons essayé dans ce défi d'utiliser à la fois le Morse et les nombres binaires.
+    Maintenant à vous de jouer pour créer une horloge Morse sonore, 
+    avec deux sons 'bip court' et 'bip long' ;-)
+</p>
+
+<p>
+    <strong>Préconditions: </strong><br>
+    <em>time_string</em> contient un horaire correct.
+
+</p>
+
+<p class="for_info_only">
+    <strong>Comment utiliser TryIt: </strong><br>
+    <iframe width="560" height="315" src="//www.youtube.com/embed/OqSAHhRlwx4" frameborder="0" allowfullscreen></iframe>
+</p>
