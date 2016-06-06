@@ -1,0 +1,15 @@
+"use strict";
+
+function checkio(data) {
+    return ".- .... : .-- .--- : -.. -..-";
+}
+
+var assert = require('assert');
+
+if (!global.is_checking) {
+    assert.equal(checkio("10:37:49"), ".- .... : .-- .--- : -.. -..-", "1st");
+    assert.equal(checkio("21:34:56"), "-. ...- : .-- .-.. : -.- .--.", "2nd");
+    assert.equal(checkio("00:1:02"), ".. .... : ... ...- : ... ..-.", "3rd");
+    assert.equal(checkio("23:59:59"), "-. ..-- : -.- -..- : -.- -..-", "4th");
+    console.log("Coding complete? Click 'Check' to review your tests and earn cool rewards!");
+}
