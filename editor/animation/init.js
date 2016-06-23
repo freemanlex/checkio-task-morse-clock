@@ -6,58 +6,7 @@ requirejs(['ext_editor_io', 'jquery_190', 'raphael_210'],
         var rCanvas;
 
 
-        ext.set_console_process_ret(function (this_e, ret) {
-
-            var parsed = ret.match(/\'([.-]{2}) ([.-]{4}) : ([.-]{3}) ([.-]{4}) : ([.-]{3}) ([.-]{4})\'/);
-//            console.log(parsed);
-            rCanvas.remove();
-            $tryit.find(".result-canvas").text("");
-            if (!parsed) {
-                $tryit.find(".result-canvas").text("The result has wrong format.")
-            }
-            else {
-                var data = "";
-                for (var i = 1; i < 7; i++) {
-                    var temp = 0;
-                    var morse = parsed[i];
-                    var ml = morse.length;
-                    for (var j = 0; j < morse.length; j++){
-                        temp += morse[j] == "-" ? Math.pow(2, ml - j - 1) : 0;
-                    }
-                    data += temp;
-                }
-                rCanvas.createCanvas($tryit.find(".result-canvas")[0], data, true);
-            }
-            $tryit.find(".checkio-result").html("Result<br>" + ret);
-        });
-
-        ext.set_generate_animation_panel(function (this_e) {
-
-            $tryit = $(this_e.setHtmlTryIt(ext.get_template('tryit')));
-
-            tCanvas = new MorseClockCanvas({
-                radius: 12, paddingX: 8
-            });
-            tCanvas.createNumbset($tryit.find(".tryit-canvas")[0], "103749");
-
-            tCanvas.createFeedback();
-
-            rCanvas = new MorseClockCanvas({
-                radius: 12, paddingY: 5, paddingX: 8, y0: 3
-            });
-
-            $tryit.find(".bn-random").click(function (e) {
-                tCanvas.randomData();
-            });
-            $tryit.find(".tryit-canvas").mousedown(function (e) {
-                e.originalEvent.preventDefault();
-            });
-            $tryit.find(".bn-check").click(function (e) {
-                this_e.sendToConsoleCheckiO(tCanvas.gatherData());
-                e.stopPropagation();
-                return false;
-            });
-        });
+        
 
         function zeroFill(number, width) {
             width -= number.toString().length;
