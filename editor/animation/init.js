@@ -1,89 +1,6 @@
 //Dont change it
-requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
-    function (ext, $, TableComponent) {
-
-        var cur_slide = {};
-
-        ext.set_start_game(function (this_e) {
-        });
-
-        ext.set_process_in(function (this_e, data) {
-            cur_slide["in"] = data[0];
-        });
-
-        ext.set_process_out(function (this_e, data) {
-            cur_slide["out"] = data[0];
-        });
-
-        ext.set_process_ext(function (this_e, data) {
-            cur_slide.ext = data;
-            this_e.addAnimationSlide(cur_slide);
-            cur_slide = {};
-        });
-
-        ext.set_process_err(function (this_e, data) {
-            cur_slide['error'] = data[0];
-            this_e.addAnimationSlide(cur_slide);
-            cur_slide = {};
-        });
-
-        ext.set_animate_success_slide(function (this_e, options) {
-            var $h = $(this_e.setHtmlSlide('<div class="animation-success"><div></div></div>'));
-            this_e.setAnimationHeight(115);
-        });
-
-        ext.set_animate_slide(function (this_e, data, options) {
-            var $content = $(this_e.setHtmlSlide(ext.get_template('animation'))).find('.animation-content');
-            if (!data) {
-                console.log("data is undefined");
-                return false;
-            }
-            if (data.error) {
-                $content.find('.call').html('Fail: checkio(' + JSON.stringify(data.in) + ')');
-                $content.find('.output').html(data.error.replace(/\n/g, ","));
-
-                $content.find('.output').addClass('error');
-                $content.find('.call').addClass('error');
-                $content.find('.answer').remove();
-                $content.find('.explanation').remove();
-                this_e.setAnimationHeight($content.height() + 60);
-                return false;
-            }
-
-            var checkioInput = data.in;
-            var rightResult = data.ext["answer"];
-            var userResult = data.out;
-            var result = data.ext["result"];
-            var result_addon = data.ext["result_addon"];
-
-
-            //if you need additional info from tests (if exists)
-            var explanation = data.ext["explanation"];
-
-            $content.find('.output').html('&nbsp;Your result:&nbsp;' + JSON.stringify(userResult));
-
-            if (!result) {
-                $content.find('.call').html('Fail: checkio(' + JSON.stringify(checkioInput) + ')');
-                $content.find('.answer').html('Right result:&nbsp;' + JSON.stringify(rightResult));
-                $content.find('.answer').addClass('error');
-                $content.find('.output').addClass('error');
-                $content.find('.call').addClass('error');
-            }
-            else {
-                $content.find('.call').html('Pass: checkio(' + JSON.stringify(checkioInput) + ')');
-                $content.find('.answer').remove();
-            }
-            //Dont change the code before it
-
-            var canvas = new MorseClockCanvas();
-            canvas.createCanvas($content.find(".explanation")[0], explanation);
-
-
-            this_e.setAnimationHeight($content.height() + 60);
-
-        });
-
-
+requirejs(['ext_editor_io', 'jquery_190', 'raphael_210'],
+    function (extIO, $, TableComponent) {
         var $tryit;
         var tCanvas;
         var rCanvas;
@@ -329,6 +246,69 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
 
         }
 
+        var io = new extIO({
+            functions: {
+                js: 'morseClock',
+                python: 'checkio'
+            },
+            animation: function($expl, data){
+                var explanation = data.ext?data.ext.explanation:undefined;
+                if (!explanation){
+                    return;
+                }
+                var canvas = new MorseClockCanvas();
+                canvas.createCanvas($expl[0], explanation);
+            },
+            tryit:function (this_e) {
+                $tryit = this_e.extSetHtmlTryIt(this_e.getTemplate('tryit'));
+
+                tCanvas = new MorseClockCanvas({
+                    radius: 12, paddingX: 8
+                });
+                tCanvas.createNumbset($tryit.find(".tryit-canvas")[0], "103749");
+
+                tCanvas.createFeedback();
+
+                rCanvas = new MorseClockCanvas({
+                    radius: 12, paddingY: 5, paddingX: 8, y0: 3
+                });
+
+                $tryit.find(".bn-random").click(function (e) {
+                    tCanvas.randomData();
+                });
+                $tryit.find(".tryit-canvas").mousedown(function (e) {
+                    e.originalEvent.preventDefault();
+                });
+                $tryit.find(".bn-check").click(function (e) {
+                    this_e.extSendToConsoleCheckiO(tCanvas.gatherData());
+                    e.stopPropagation();
+                    return false;
+                });
+            },
+            retConsole: function (ret) {
+                var parsed = ret.match(/\'([.-]{2}) ([.-]{4}) : ([.-]{3}) ([.-]{4}) : ([.-]{3}) ([.-]{4})\'/);
+                rCanvas.remove();
+                $tryit.find(".result-canvas").text("");
+                if (!parsed) {
+                    $tryit.find(".result-canvas").text("The result has wrong format.")
+                }
+                else {
+                    var data = "";
+                    for (var i = 1; i < 7; i++) {
+                        var temp = 0;
+                        var morse = parsed[i];
+                        var ml = morse.length;
+                        for (var j = 0; j < morse.length; j++){
+                            temp += morse[j] == "-" ? Math.pow(2, ml - j - 1) : 0;
+                        }
+                        data += temp;
+                    }
+                    rCanvas.createCanvas($tryit.find(".result-canvas")[0], data, true);
+                }
+                $tryit.find(".checkio-result").html("Result<br>" + ret);
+            }
+        });
+        io.start();
 
     }
 );

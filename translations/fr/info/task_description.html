@@ -47,10 +47,8 @@
 </p>
 
 <p style="text-align: center;">
-    <img class="for_info_only" title="example" src="{{ MEDIA }}morse_clock.png" alt="example" width="500px"/>
+    <img class="for_info_only" title="example" src="{{ MEDIA }}morse_clock.png" alt="example" style="max-height:460px"/>
     <span class="ref-source"><a href="http://en.wikipedia.org/wiki/Binary_clock">source: Wikipedia</a></span>
-
-    <img class="for_editor_only" title="example" src="{{ MEDIA }}morse_clock.png" alt="example" width="380px"/>
 </p>
 
 <p>
@@ -78,11 +76,17 @@
     <p>
         <strong>Exemple:</strong>
     </p>
-    <pre class="brush: python">checkio("10:37:49") == ".- .... : .-- .--- : -.. -..-"
+    <pre class="brush: python">{% if interpreter.slug == "js-node" %}
+morseClock("10:37:49") == ".- .... : .-- .--- : -.. -..-"
+morseClock("21:34:56") == "-. ...- : .-- .-.. : -.- .--."
+morseClock("00:1:02") == ".. .... : ... ...- : ... ..-."
+morseClock("23:59:59") == "-. ..-- : -.- -..- : -.- -..-"
+{% else %}
+checkio("10:37:49") == ".- .... : .-- .--- : -.. -..-"
 checkio("21:34:56") == "-. ...- : .-- .-.. : -.- .--."
 checkio("00:1:02") == ".. .... : ... ...- : ... ..-."
 checkio("23:59:59") == "-. ..-- : -.- -..- : -.- -..-"
-</pre>
+{% endif %}</pre>
 </div>
 
 <p class="for_info_only">
