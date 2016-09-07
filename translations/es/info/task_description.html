@@ -1,0 +1,111 @@
+<img class="for_info_only half" src="{{MEDIA}}title.png" style="float:left;max-height: 400px">
+<style>
+    .ref-source {
+        font-size: .7em;
+        position: relative;
+        left: -20%;
+    }
+    pre.format {
+        background-color: #EBEDED;
+        margin: 5px;
+        padding: 3px;
+        border: solid 1px #737370;
+        border-radius: 3px;
+        --webkit-border-radius: 3px;
+        width: 166px;
+    }
+</style>
+
+<div class="story">
+    <p>
+        "di-dah di-di-di-dit di-dah-dah di-dah-dah-dah dah-di-dit dah-di-di-dah",
+        El Morszelidazor hacía fuertes ruidos metalicos.<br><br>
+
+        "Que estas haciendo?" pregunto Nikola con curiosidad.<br><br>
+
+        "Estoy enviando los registros de la ultima expedicion al cuartel general, pero no es una tara facil..."
+        refunfuño Stephen , "Puedes imaginar que con toda la potencia de los ordenadores que tenemos a nuestra
+        disposicion tengo que un mensaje a codigo Morse con solo un boton de encendido/apagado... Mmm... que fastidio."
+        Se quejo del problema.<br><br>
+
+        "Dejame echar un vistazo." Nikola ofrecio su ayuda, "Parece que hay una magnfica solucion, 
+         podriamos automatizar el proceso."<br><br>
+
+        "Oh.. tu, mi heroe." dijo Stephen excitado . "Pero, como lo hacemos?"<br><br>
+
+        "Con Python!" Nikola exclaimed.
+    </p>
+</div>
+
+<p>
+
+    Ayuda a Stephen a crear un modulo para convertir una cadena con horario normal en una cadena
+    con horario Morse. Como puedes ver en la ilustracion, el circulo gris significa "encendido", mientras
+    que el circulo blanco significa "apagado".
+    Todo digito en la cadena del horario tiene un numero diferente de ranuras.
+    El primer digito de la hora contiene una longitud de 2 mientras que el segundo tiene una longitud de 4.
+    El primer digito de los minutos y los segundos tiene una longitud de 3 mientras que el segundo digito
+    de los minutos y los segundos tienen una longitud de 4. Todos los digitos son convertidos a representacion
+    binaria .Tu convertiras todo "encendido" (o 1) en una raya ("-") and todo "apagado" (o 0) en un punto (".")
+
+<p style="text-align: center;">
+    <img class="for_info_only" title="example" src="{{ MEDIA }}morse_clock.png" alt="example" style="max-height:460px"/>
+    <span class="ref-source"><a href="http://en.wikipedia.org/wiki/Binary_clock">source: Wikipedia</a></span>
+</p>
+
+<p>
+    Una cadena de tiempo puede estar en los siguientes formatos: <em>"hh:mm:ss"</em>, <em>"h:m:s"</em> or <em>"hh:m:ss"</em>.
+    Los digitos perdidos se tomaran como cero. Por ejemplo, "1:2:3" es lo mismo que "01:02:03".
+</p>
+<div>
+    El resultado sera una cadena de tiempo en morse con el siguiente formato:
+    <pre class="format" style="text-align: center;">"h h : m m : s s"</pre>
+    donde cada digito esatara representado por una secuencia de "." and "-".
+</div>
+<br/>
+
+<p>
+    <strong>Input: </strong> Una cadena de tiempo normal como string (unicode).
+</p>
+
+<div>
+    <strong>Output: </strong> Una cadena de tiempo en morse como string.
+</div>
+<br>
+<div class="for_info_only">
+    <p>
+        <strong>Ejemplo:</strong>
+    </p>
+    <pre class="brush: python">{% if interpreter.slug == "js-node" %}
+morseClock("10:37:49") == ".- .... : .-- .--- : -.. -..-"
+morseClock("21:34:56") == "-. ...- : .-- .-.. : -.- .--."
+morseClock("00:1:02") == ".. .... : ... ...- : ... ..-."
+morseClock("23:59:59") == "-. ..-- : -.- -..- : -.- -..-"
+{% else %}
+checkio("10:37:49") == ".- .... : .-- .--- : -.. -..-"
+checkio("21:34:56") == "-. ...- : .-- .-.. : -.- .--."
+checkio("00:1:02") == ".. .... : ... ...- : ... ..-."
+checkio("23:59:59") == "-. ..-- : -.- -..- : -.- -..-"
+{% endif %}</pre>
+</div>
+
+<p class="for_info_only">
+    <strong>Para que se usa: </strong>
+    Has visto la tarea del reloj binario antes?
+     Esto es puede ser un regalo divertido para cualquier geek.
+     Tratamos de combinar el viejo buen codigo Morse con un reloj binario en esta tarea,
+     y ahora se puede crear el nuevo reloj binario mas complejo,
+     no muestra el tiempo - pero hace bips and beeps estilo morse. ;-)
+
+</p>
+
+<p>
+    <strong>Precondicion: </strong><br>
+    <em>time_string</em> contiene el tiempo correctamente.
+
+</p>
+
+<p class="for_info_only">
+    <strong>How to use TryIt: </strong><br>
+    <iframe width="560" height="315" src="//www.youtube.com/embed/OqSAHhRlwx4" frameborder="0" allowfullscreen></iframe>
+</p>
