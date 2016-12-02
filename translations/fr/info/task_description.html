@@ -16,26 +16,10 @@
 
         "Oh.. tu es mon héros du jour", jubila Stephen . "Alors, comment allons-nous précéder?"<br><br>
 
-        "Avec Python!", s'exclama Nikola.
+        "Avec {% if interpreter.slug == "js-node" %}JavaScript{% else %}Python{% endif %}!", s'exclama Nikola.
     </p>
 </div>
 
-<style>
-    .ref-source {
-        font-size: .7em;
-        position: relative;
-        left: -20%;
-    }
-    pre.format {
-        background-color: #EBEDED;
-        margin: 5px;
-        padding: 3px;
-        border: solid 1px #737370;
-        border-radius: 3px;
-        --webkit-border-radius: 3px;
-        width: 166px;
-    }
-</style>
 
 <p>
    Aidez Stephen à créer un module de conversion de chaîne de caractères, qui symbolise un horaire, en Morse.
