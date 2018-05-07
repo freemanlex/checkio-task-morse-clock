@@ -1,4 +1,4 @@
-def checkio(time_string):
+def checkio(time_string: str) -> str:
 
     #replace this for solution
     return ".- .... : .-- .--- : -.. -..-"
