@@ -54,19 +54,9 @@
 <br>
 <div class="for_info_only">
     <p>
-        <strong>Example:</strong>
+        <strong>Examples:</strong>
     </p>
-    <pre class="brush: python">{% if interpreter.slug == "js-node" %}
-morseClock("10:37:49") == ".- .... : .-- .--- : -.. -..-"
-morseClock("21:34:56") == "-. ...- : .-- .-.. : -.- .--."
-morseClock("00:1:02") == ".. .... : ... ...- : ... ..-."
-morseClock("23:59:59") == "-. ..-- : -.- -..- : -.- -..-"
-{% else %}
-checkio("10:37:49") == ".- .... : .-- .--- : -.. -..-"
-checkio("21:34:56") == "-. ...- : .-- .-.. : -.- .--."
-checkio("00:1:02") == ".. .... : ... ...- : ... ..-."
-checkio("23:59:59") == "-. ..-- : -.- -..- : -.- -..-"
-{% endif %}</pre>
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 <p class="for_info_only">

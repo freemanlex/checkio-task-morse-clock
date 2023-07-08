@@ -1,5 +1,5 @@
 //Dont change it
-requirejs(['ext_editor_io', 'jquery_190', 'raphael_210'],
+requirejs(['ext_editor_io2', 'jquery_190', 'raphael_210'],
     function (extIO, $, TableComponent) {
         var $tryit;
         var tCanvas;
@@ -196,10 +196,6 @@ requirejs(['ext_editor_io', 'jquery_190', 'raphael_210'],
         }
 
         var io = new extIO({
-            functions: {
-                js: 'morseClock',
-                python: 'checkio'
-            },
             animation: function($expl, data){
                 var explanation = data.ext?data.ext.explanation:undefined;
                 if (!explanation){

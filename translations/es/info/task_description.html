@@ -17,7 +17,7 @@
 
         "Oh.. tu, mi heroe." dijo Stephen excitado . "Pero, como lo hacemos?"<br><br>
 
-        "Con {% if interpreter.slug == "js-node" %}JavaScript{% else %}Python{% endif %}!" Nikola exclaimed.
+        "Con {% if is_js %}JavaScript{% else %}Python{% endif %}!" Nikola exclaimed.
     </p>
 </div>
 
@@ -49,28 +49,18 @@
 <br/>
 
 <p>
-    <strong>Input: </strong> Una cadena de tiempo normal como string (unicode).
+    <strong>Input:</strong> Una cadena de tiempo normal como string (unicode).
 </p>
 
 <div>
-    <strong>Output: </strong> Una cadena de tiempo en morse como string.
+    <strong>Output:</strong> Una cadena de tiempo en morse como string.
 </div>
 <br>
 <div class="for_info_only">
     <p>
         <strong>Ejemplo:</strong>
     </p>
-    <pre class="brush: python">{% if interpreter.slug == "js-node" %}
-morseClock("10:37:49") == ".- .... : .-- .--- : -.. -..-"
-morseClock("21:34:56") == "-. ...- : .-- .-.. : -.- .--."
-morseClock("00:1:02") == ".. .... : ... ...- : ... ..-."
-morseClock("23:59:59") == "-. ..-- : -.- -..- : -.- -..-"
-{% else %}
-checkio("10:37:49") == ".- .... : .-- .--- : -.. -..-"
-checkio("21:34:56") == "-. ...- : .-- .-.. : -.- .--."
-checkio("00:1:02") == ".. .... : ... ...- : ... ..-."
-checkio("23:59:59") == "-. ..-- : -.- -..- : -.- -..-"
-{% endif %}</pre>
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 <p class="for_info_only">
