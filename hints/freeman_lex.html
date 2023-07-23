@@ -1,0 +1,169 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        I have no idea how to start solving this mission.
+    </div>
+    <div class="answer">
+        <p>
+            Catch an idea 💡! To split the given string <b class="code">time</b> into hours, minutes and seconds then iterate over these separate strings. Each string convert into an integer and split to tens and ones parts. Convert each digit into binary string, remove prefix and replace "10" to "-.". Then join strings into hours, minutes and second and join all together into time. The solution has a lot of operations, although they are not difficult, be attentive.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, what should I start from?
+    </div>
+    <div class="answer">
+        <p>
+            Declare a variable <b class="code">res</b> as an empty list to store your converted hours, minutes and seconds before final joining.
+        </p>
+        <pre class="brush: python">
+res = []
+        </pre>
+        <p>
+            Split the given string <b class="code">time</b> into substrings of hours, minutes and seconds, using <a target="_blank" href="https://www.w3schools.com/python/ref_string_split.asp">str.split()</a> method with ":" separator.
+        </p>
+        <pre class="brush: python">
+time.split(":")
+        </pre>
+        <p>It returns a list of strings, which you use in the next step.</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        What to do next?
+    </div>
+    <div class="answer">
+        <p>
+            Iterate over the indexes and string of the list, using <b class="code">for</b> loop and <a target="_blank" href="https://www.w3schools.com/python/ref_func_enumerate.asp">enumerate()</a> function.
+        </p>
+        <pre class="brush: python">
+for i, n in enumerate(time.split(":")):
+    ...
+        </pre>
+        <p>
+            Each <b class="code">n</b> is still a string which you need to convert into an integer with <b class="code">int()</b> function and extract tens and ones parts with the function <a target="_blank" href="https://www.w3schools.com/python/ref_func_divmod.asp">divmod()</a>.
+        </p>
+        <pre class="brush: python">
+divmod(int(n), 10)
+        </pre>
+        <p>It returns two integers, which you use in the next step.</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        It's still not clear. I need a hint.
+    </div>
+    <div class="answer">
+        <p>
+           Ok, now you need to convert these two integers into binary strings. Create anonymous function <b class="code">convert</b> using <b class="code">lambda</b> function before the loop and use <a target="_blank" href="https://www.w3schools.com/python/ref_func_map.asp">map()</a> function to apply <b class="code">convert</b> to two integers and assign the to two variables.
+        </p>
+        <pre class="brush: python">
+convert = lambda s: ...
+
+res = []
+for i, n in enumerate(time.split(":")):
+    t, o = map(convert, divmod(int(n), 10))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        How to make the conversion? 
+    </div>
+    <div class="answer">
+        <p>
+            Yes, it's time to write the function <b class="code">convert</b>. Let's think what we should do with each single integers. Convert it into binary string first with <b class="code">bin()</b> function, remove a prefix "0b" using string <a target="_blank" href="https://www.w3schools.com/python/gloss_python_string_slice.asp">slicing</a>, complement to 4 characters (will remove unnecessary later) with <a target="_blank" href="https://www.w3schools.com/python/ref_string_zfill.asp">str.zfill()</a> method and replace all "1" to "-" and all "0" to "." with <a target="_blank" href="https://www.w3schools.com/python/ref_string_replace.asp">str.replace()</a> method. 
+        </p>
+        <pre class="brush: python">
+convert = lambda s: bin(s)[2:].zfill(4).replace("1", "-").replace("0", ".")
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Wow, that's a lot of work done in one expression! What's next?
+    </div>
+    <div class="answer">
+        <p>
+            Your ones <b class="code">o</b> remains unchanged. But as yuo see, tens must have only two characters for hours and three characters for minutes and seconds. That's where index <b class="code">i</b> from the loop is needed. You may use logic value of <b class="code">i</b> and string slicing to receive slice start index 2, 1, 1 from block index <b class="code">i</b> 0, 1, 2.
+        </p>
+        <pre class="brush: python">
+t[2 - bool(i):]
+        </pre>
+        <p>
+            Now join tens and ones with <a target="_blank" href="https://www.w3schools.com/python/ref_string_join.asp">str.join()</a> method with " " separator and <b class="code">append</b> it into the <b class="code">res</b>.
+        </p>
+        <pre class="brush: python">
+res.append(" ".join((t[2 - bool(i):], o)))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        How to finish the code?
+    </div>
+    <div class="answer">
+        <p>
+            You have correct converted binary strings inside <b class="code">res</b> and you just need to join them with " : " separator and return.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        So, how my final solution should look like?
+    </div>
+    <div class="answer">
+        <p>
+            You just need to join all previous hints and wrap your code into function expression. Using type hints for input and output data are highly recommended.
+        </p>
+        <p>Here is the whole solution:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def checkio(time: str) -> str:
+
+    convert = lambda s: bin(s)[2:].zfill(4).replace("1", "-").replace("0", ".")
+
+    res = []
+    for i, n in enumerate(time.split(":")):
+        t, o = map(convert, divmod(int(n), 10))
+        res.append(" ".join((t[2 - bool(i):], o)))
+        
+    return " : ".join(res)
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Show me more solutions!<br />
+        'Cause I wanna be a real 🥇 Python Ninnjaa!
+    </div>
+    <div class="answer">
+        <p>Sure, grab it!</p>
+        <p>
+            Look at this beauty! Create a string template of binary representation with correct length, fill it with numbers and then translate into dashes and dots.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def checkio(time_string: str) -> str:
+
+    template = "{:02b} {:04b} : {:03b} {:04b} : {:03b} {:04b}"
+    
+    h, m, s = (divmod(int(n), 10) for n in time_string.split(':'))
+    
+    return template.format(*h,*m,*s).translate(str.maketrans('01', '.-'))
+        </pre>
+        </div>
+        <p>Click <b>Best Solutions</b> at mission menu and see a lot of other interesting solutions!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Thanks! I know and understand more now! Everything works fine!
+    </div>
+    <div class="answer">
+        Glad to hear it 👍!
+    </div>
+</div>
+</body>
